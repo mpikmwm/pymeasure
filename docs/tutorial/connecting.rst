@@ -97,6 +97,20 @@ If you use an invalid argument, either misspelled or not valid for the chosen in
 
 When using a separately-created Adapter instance, you define any custom settings when creating the adapter. Any keyword arguments passed in are discarded.
 
+Using PyVisa recources as adpter instance
+=========================================
+
+As adapter you can pass a pyVisa recource to use. As an example the Keithley 2000 has a GBIB port and an RS232 port. While useing an RS232 to USB adapter pyVisa lets you create a Usb/Serial recource to use. ::
+
+    from pymeasure.instruments.keithley import Keithley2000
+
+    meter = Keithley2000('COM12', baud_rate=9600, write_termination='\r', read_termination='\r')
+    meter.measure_voltage()
+    print("{:.6f}V".format(meter.voltage))
+
+For more information on pyVisa recources take look at:
+https://pyvisa.readthedocs.io/en/latest/introduction/names.html#intro-resource-names and/or https://pyvisa.readthedocs.io/en/latest/introduction/communication.html
+
 ----
 
 The above examples illustrate different methods for communicating with instruments, using adapters to keep instrument code independent from the communication protocols. Next we present the methods for setting up measurements.
